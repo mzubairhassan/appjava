@@ -1,0 +1,81 @@
+
+<button type="button" class="btn btn-success " (click)="showAddModel()" data-toggle="modal" data-target="#myModal">Add Warehouse</button>
+
+    <!-- Modal -->
+    <div class="modal fade" id="myModal" role="dialog">
+        <div class="modal-dialog">
+
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">{{modelHeader}}</h4>
+                    
+                </div>
+                <div class="modal-body">
+                    <form class="form-horizontal" (submit)="modelSubmit()">
+                      <fieldset>
+                        
+                        <div class="form-group">
+                          <label  *ngIf="modelBtn == 'Edit Warehouse'" >Warehouse ID: &nbsp;  <span class="badge">{{warehouseId}}</span></label><br />
+                          <label for="inputName" class="col-lg-2 control-label">Warehouse Name</label>
+                          <div class="col-lg-10">
+                            <input type="text" class="form-control" [(ngModel)]="warehouseName" name="warehouseName" id="inputName" placeholder="Enter Warehouse name here">
+                          </div>
+                          
+                        </div>
+                         <div class="form-group">
+                          <label for="inputLocation" class="col-lg-2 control-label">Warehouse Location</label>
+                          <div class="col-lg-10">
+                            <input type="text" class="form-control" [(ngModel)]="warehouseLocation" name="warehouseLocation" required id="inputLocation" placeholder="Enter Warehouse Location here">
+                          </div>
+                          
+                        </div>
+                        
+                        <div class="form-group">
+                          <div class="col-lg-10 col-lg-offset-2">
+                            
+                            <button type="submit" *ngIf="modelBtn == 'Edit Warehouse'" class="btn btn-info" data-dismiss="modal" (click)="editWarehouseSubmit()" >Edit Warehouse</button>
+                            <button type="submit" *ngIf="modelBtn == 'Add Warehouse'" class="btn btn-success" data-dismiss="modal" (click)="addWarehouseSubmit()" >Add Warehouse</button>
+                          </div>
+                        </div>
+                      </fieldset>
+                    </form>
+                </div>
+                
+            </div>
+
+        </div>
+    </div>
+
+<!-- END Modal -->
+
+
+
+<!-- Start Table dynamic -->
+
+<table class="table table-striped table-hover ">
+  <thead>
+    <tr>
+      <th>#</th>
+      <th>Warehouse Name</th>
+      <th>Warehouse Location</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+
+    <tr *ngFor="let warehouse of warehouses">
+      <td>{{warehouse.id}}</td>
+      <td>{{warehouse.warehname}}</td>
+      <td>{{warehouse.location}}</td>
+      <td>
+
+    <button type="button" class="btn btn-info btn-sm " data-toggle="modal" (click)="showeditModel(warehouse)" data-target="#myModal">Edit</button>
+    <a class="btn btn-danger btn-sm" (click)="deleteWarehouse(warehouse)">Delete</a>
+      </td>
+    </tr>
+    
+  </tbody>
+</table> 
+<!-- END Table dynamic -->

@@ -1,0 +1,89 @@
+<!-- opens a model  -->
+<button type="button" class="btn btn-success " (click)="showAddModel()" data-toggle="modal" data-target="#myModal">Add Product</button>
+
+    <!-- Modal -->
+    <div class="modal fade" id="myModal" role="dialog">
+        <div class="modal-dialog">
+
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">{{modelHeader}}</h4>
+                    
+                </div>
+                <div class="modal-body">
+                    <form class="form-horizontal" (submit)="modelSubmit()">
+                      <fieldset>
+                        <!-- new product name -->
+                        <div class="form-group">
+                          <label  *ngIf="modelBtn == 'Edit Product'" >Product ID: &nbsp;  <span class="badge">{{prodId}}</span></label><br />
+                          <label for="inputEmail" class="col-lg-2 control-label">Product Name</label>
+                          <div class="col-lg-10">
+                            <input type="text" class="form-control" [(ngModel)]="prodName" name="prodName" id="inputEmail" placeholder="Enter product name here">
+                          </div>
+                          
+                        </div>
+                         <div class="form-group">
+                            <label for="select" class="col-lg-2  control-label">Product Type</label>
+                            <div class="col-lg-10">
+                              <select class="form-control" [(ngModel)]="prodType" name="prodType" id="select">
+                                <option>Select below </option>
+                                <option>Finished Product</option>
+                                <option>Component</option>
+                                <option>Raw</option>
+                                <option>Inner</option>
+                                <option>Outer</option>
+                              </select>
+                              
+                            </div>
+                            
+                          </div>
+                        
+                        <div class="form-group">
+                          <div class="col-lg-10 col-lg-offset-2">
+                            <!-- ng if used to show and hide. for edit mode and add mode -->
+                            <button type="submit" *ngIf="modelBtn == 'Edit Product'" class="btn btn-info" data-dismiss="modal" (click)="editProdSubmit()" >Edit Product</button>
+                            <button type="submit" *ngIf="modelBtn == 'Add Product'" class="btn btn-success" data-dismiss="modal" (click)="addProdSubmit()" >Add Product</button>
+                          </div>
+                        </div>
+                      </fieldset>
+                    </form>
+                </div>
+                
+            </div>
+
+        </div>
+    </div>
+
+<!-- END Modal -->
+
+
+
+<!-- Start Table dynamic -->
+
+<table class="table table-striped table-hover ">
+  <thead>
+    <tr>
+      <th>#</th>
+      <th>Product Name</th>
+      <th>Product Type</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+<!-- repeating products to table -->
+    <tr *ngFor="let product of products">
+      <td>{{product.id}}</td>
+      <td>{{product.prodname}}</td>
+      <td>{{product.type}}</td>
+      <td>
+        <!-- button to perform actions on current row. selected -->
+    <button type="button" class="btn btn-info btn-sm " data-toggle="modal" (click)="showeditModel(product)" data-target="#myModal">Edit</button>
+		<a class="btn btn-danger btn-sm" (click)="deleteProduct(product)">Delete</a>
+      </td>
+    </tr>
+    
+  </tbody>
+</table> 
+<!-- END Table dynamic -->

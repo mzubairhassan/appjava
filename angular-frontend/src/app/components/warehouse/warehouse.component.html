@@ -1,0 +1,9 @@
+<!-- container component for displaywarehouse and viewproductquantity componenets -->
+
+<div>
+	<a  class="btn btn-primary" (click)="viewWarehouses()">View All Warehouses</a>
+	<a  class="btn btn-success" (click)="viewProdQty()">View Products Quantity</a>
+</div>
+<!-- toggel window var is used to switch between compoenents as it is in warehouse component main -->
+<app-displaywarehouse *ngIf="toggleWindow">View ALl works!</app-displaywarehouse>
+<app-viewproductquantity *ngIf="!toggleWindow">View ALl works!</app-viewproductquantity>
